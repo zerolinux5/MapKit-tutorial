@@ -53,16 +53,19 @@
     NSArray *data = [root objectForKey:@"data"];
     
     for (NSArray *row in data) {
-        NSNumber * latitude = [[row objectAtIndex:22]objectAtIndex:1];
-        NSNumber * longitude = [[row objectAtIndex:22]objectAtIndex:2];
-        NSString * crimeDescription = [row objectAtIndex:18];
-        NSString * address = [row objectAtIndex:14];
+        NSNumber *latitude = [[row objectAtIndex:17] objectAtIndex:1];
+        NSNumber *longitude = [[row objectAtIndex:17] objectAtIndex:2];
+        NSString *crimeDescription = [row objectAtIndex:12];
+        NSString *address = [row objectAtIndex:11];
         
         CLLocationCoordinate2D coordinate;
-        coordinate.latitude = latitude.doubleValue;
-        coordinate.longitude = longitude.doubleValue;
-        MyLocation *annotation = [[MyLocation alloc] initWithName:crimeDescription address:address coordinate:coordinate] ;
-        [self.MKMapView addAnnotation:annotation];
+        if (latitude == [NSNull null] || longitude == [NSNull null]) {
+        } else {
+            coordinate.latitude = latitude.doubleValue;
+            coordinate.longitude = longitude.doubleValue;
+            MyLocation *annotation = [[MyLocation alloc] initWithName:crimeDescription address:address coordinate:coordinate] ;
+            [self.MKMapView addAnnotation:annotation];
+        }
 	}
 }
 
@@ -78,7 +81,7 @@
                       centerLocation.latitude, centerLocation.longitude, 0.5*METERS_PER_MILE];
     
     // 3
-    NSURL *url = [NSURL URLWithString:@"http://data.baltimorecity.gov/api/views/INLINE/rows.json?method=index"];
+    NSURL *url = [NSURL URLWithString:@"https://data.baltimorecity.gov/api/views/wsfq-mvij/rows.json?method=index"];
     
     // 4
     ASIHTTPRequest *_request = [ASIHTTPRequest requestWithURL:url];
