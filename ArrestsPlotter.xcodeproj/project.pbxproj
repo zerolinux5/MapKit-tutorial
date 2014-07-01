@@ -36,6 +36,7 @@
 		EAAF8A0E1962794400D3B1AE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAF8A0D1962794400D3B1AE /* SystemConfiguration.framework */; };
 		EAAF8A101962794E00D3B1AE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAF8A0F1962794D00D3B1AE /* MobileCoreServices.framework */; };
 		EAAF8A121962795E00D3B1AE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAF8A111962795E00D3B1AE /* libz.dylib */; };
+		EAAF8A1419627A7800D3B1AE /* command.json in Resources */ = {isa = PBXBuildFile; fileRef = EAAF8A1319627A7800D3B1AE /* command.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		EAAF8A0D1962794400D3B1AE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		EAAF8A0F1962794D00D3B1AE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		EAAF8A111962795E00D3B1AE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		EAAF8A1319627A7800D3B1AE /* command.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = command.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 		EAAF89B71962752600D3B1AE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EAAF8A1319627A7800D3B1AE /* command.json */,
 				EAAF89B81962752600D3B1AE /* ArrestsPlotter-Info.plist */,
 				EAAF89B91962752600D3B1AE /* InfoPlist.strings */,
 				EAAF89BC1962752600D3B1AE /* main.m */,
@@ -325,6 +328,7 @@
 				EAAF89C91962752600D3B1AE /* Images.xcassets in Resources */,
 				EAAF89BB1962752600D3B1AE /* InfoPlist.strings in Resources */,
 				EAAF89C41962752600D3B1AE /* Main.storyboard in Resources */,
+				EAAF8A1419627A7800D3B1AE /* command.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
