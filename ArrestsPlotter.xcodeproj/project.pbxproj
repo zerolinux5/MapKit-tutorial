@@ -21,6 +21,7 @@
 		EAAF89D21962752600D3B1AE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAF89B41962752600D3B1AE /* UIKit.framework */; };
 		EAAF89DA1962752600D3B1AE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EAAF89D81962752600D3B1AE /* InfoPlist.strings */; };
 		EAAF89DC1962752600D3B1AE /* ArrestsPlotterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAF89DB1962752600D3B1AE /* ArrestsPlotterTests.m */; };
+		EAAF89E6196275FA00D3B1AE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAF89E5196275FA00D3B1AE /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		EAAF89D71962752600D3B1AE /* ArrestsPlotterTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ArrestsPlotterTests-Info.plist"; sourceTree = "<group>"; };
 		EAAF89D91962752600D3B1AE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EAAF89DB1962752600D3B1AE /* ArrestsPlotterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArrestsPlotterTests.m; sourceTree = "<group>"; };
+		EAAF89E5196275FA00D3B1AE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAAF89E6196275FA00D3B1AE /* MapKit.framework in Frameworks */,
 				EAAF89B31962752600D3B1AE /* CoreGraphics.framework in Frameworks */,
 				EAAF89B51962752600D3B1AE /* UIKit.framework in Frameworks */,
 				EAAF89B11962752600D3B1AE /* Foundation.framework in Frameworks */,
@@ -101,6 +104,7 @@
 		EAAF89AF1962752600D3B1AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EAAF89E5196275FA00D3B1AE /* MapKit.framework */,
 				EAAF89B01962752600D3B1AE /* Foundation.framework */,
 				EAAF89B21962752600D3B1AE /* CoreGraphics.framework */,
 				EAAF89B41962752600D3B1AE /* UIKit.framework */,
