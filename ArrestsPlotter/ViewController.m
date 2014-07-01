@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import "ASIHTTPRequest.h"
+#import "MyLocation.h"
+#import "MBProgressHUD.h"
 
 #define METERS_PER_MILE 1609.344
 
@@ -42,6 +44,28 @@
     [self.MKMapView setRegion:viewRegion animated:YES];
 }
 
+- (void)plotCrimePositions:(NSData *)responseData {
+    for (id<MKAnnotation> annotation in self.MKMapView.annotations) {
+        [self.MKMapView removeAnnotation:annotation];
+    }
+    
+    NSDictionary *root = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+    NSArray *data = [root objectForKey:@"data"];
+    
+    for (NSArray *row in data) {
+        NSNumber * latitude = [[row objectAtIndex:22]objectAtIndex:1];
+        NSNumber * longitude = [[row objectAtIndex:22]objectAtIndex:2];
+        NSString * crimeDescription = [row objectAtIndex:18];
+        NSString * address = [row objectAtIndex:14];
+        
+        CLLocationCoordinate2D coordinate;
+        coordinate.latitude = latitude.doubleValue;
+        coordinate.longitude = longitude.doubleValue;
+        MyLocation *annotation = [[MyLocation alloc] initWithName:crimeDescription address:address coordinate:coordinate] ;
+        [self.MKMapView addAnnotation:annotation];
+	}
+}
+
 - (IBAction)refreshTapped:(id)sender {
     // 1
     MKCoordinateRegion mapRegion = [self.MKMapView region];
@@ -66,15 +90,49 @@
     // 5
     [request setDelegate:self];
     [request setCompletionBlock:^{
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         NSString *responseString = [request responseString];
         NSLog(@"Response: %@", responseString);
+        [self plotCrimePositions:request.responseData];
     }];
     [request setFailedBlock:^{
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         NSError *error = [request error];
         NSLog(@"Error: %@", error.localizedDescription);
     }];
     
     // 6
     [request startAsynchronous];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading arrests...";
 }
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    static NSString *identifier = @"MyLocation";
+    if ([annotation isKindOfClass:[MyLocation class]]) {
+        
+        MKAnnotationView *annotationView = (MKAnnotationView *) [self.MKMapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if (annotationView == nil) {
+            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            annotationView.enabled = YES;
+            annotationView.canShowCallout = YES;
+            annotationView.image = [UIImage imageNamed:@"arrest.png"];//here we use a nice image instead of the default pins
+        } else {
+            annotationView.annotation = annotation;
+        }
+        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        
+        return annotationView;
+    }
+    
+    return nil;
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    MyLocation *location = (MyLocation*)view.annotation;
+    
+    NSDictionary *launchOptions = @{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving};
+    [location.mapItem openInMapsWithLaunchOptions:launchOptions];
+}
+
 @end
